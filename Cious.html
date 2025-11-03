@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Precious</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff9eb5;
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .birthday-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5);
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .birthday-card::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 209, 220, 0.5);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .birthday-card::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 182, 193, 0.5);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        h1 {
+            color: #ff6b93;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 0px rgba(255, 182, 193, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-gallery {
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .photo-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .photo-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .gallery-btn {
+            background-color: #ff9eb5;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 #ff6b93;
+        }
+
+        .gallery-btn:hover {
+            background-color: #ff6b93;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #ff6b93;
+        }
+
+        .gallery-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .music-player {
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .music-btn {
+            background: linear-gradient(135deg, #ff9eb5, #ff6b93);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 0 #d94a7a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .music-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #d94a7a;
+        }
+
+        .music-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        .music-btn.playing {
+            background: linear-gradient(135deg, #ff6b93, #d94a7a);
+        }
+
+        .birthday-message {
+            background-color: rgba(255, 209, 220, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .birthday-message h2 {
+            color: #ff6b93;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .birthday-message p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .decoration {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .decoration-1 {
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #ff9eb5;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        .decoration-3 {
+            top: 50%;
+            left: 10px;
+            width: 25px;
+            height: 25px;
+            background-color: #ffd1dc;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .birthday-card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .photo-container {
+                height: 250px;
+            }
+            
+            .birthday-message {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-card">
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        <div class="decoration decoration-3"></div>
+        
+        <h1>Happy Birthday, Cious!</h1>
+        
+        <div class="photo-gallery">
+            <div class="photo-container">
+                <<img src="C:\Users\Cass\Downloads\Untitled design (5).png" alt="Photo 1" />
+				</div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prev-btn">Previous</button>
+                <button class="gallery-btn" id="next-btn">Next</button>
+            </div>
+        </div>
+        
+        <div class="music-player">
+            <button class="music-btn" id="music-btn">
+                <span>🎵</span> Press Before You Read :)
+            </button>
+        </div>
+        
+        <div class="birthday-message">
+            <h2>To one of the strongest person I've met,</h2>
+            <p>Happy Birthday, Ate Presh! Despite the heavy rain, I believe today is one of those softer days because it marks the day that you came into this world, which you helped in making warmer, fuller, and kinder. I hope you take a moment to really feel that, to let it sink into your bones: <b><i>you matter deeply.</b></i> 
+			
+			<p><br>I know that words of affirmation have always been your thing so what present could be better than a message? At first, you intimidated me. When I stepped in sa CSO, I was honestly expecting that I would be the least close to you. But time proved me wrong. Because now, I find your presence to be one of the most comforting to me. I don't know why, is it because of the way you jokingly become mean and bossy, or the way you silently care for us because it's the way you know how to? Regardless, I'm sure that those are one of the many reasons why you are loved by the people around you the way I love you pud ate presh.</p>
+			<p><br>I know life has not always been gentle with you. I have seen the battles you fight behind quiet eyes and steady smiles, the strength it takes just to keep going when the weight of the world tries to pull you down. But look at you: you are still here. And that is not just strength, it is courage. A kind of bravery that does not always roar but still rises every single day. I'm so proud of you presh, for the days where you have been strong, and for the days where you've also been weak.</p>
+            <p><br>And yet, I want you to know something else too: you do not have to be strong all the time. You are allowed to feel everything, deeply, loudly, or in silence. You are allowed to break down. You are allowed to let go. And you are allowed to be held. If ever the world feels too heavy, I hope you know that the 9th congress will always be a space where you can rest, cry, or simply be you. No questions asked. No judgment. Just us, right here, with open arms and a steady presence.</p>
+			<p><br>So today, I wish you more than just laughter and love. I wish you peace. The kind that finds you in quiet moments and reminds you that you are safe, seen, and deeply loved. I hope your heart finds comfort in knowing you do not have to do life alone. That in all your moments, whether joyful, painful, chaotic, or still, that you will always have a purpose.</p>
+			<p><br>To more malunggaydesal and mochi moments with u presh, love u :)</p>
+	  </div>
+    </div>
+
+    <audio id="birthday-song" loop>
+        <source src="C:\Users\Cass\Downloads\NIKI - Strong Girl (Official Lyric Video).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const slides = document.querySelectorAll('.photo-slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let currentSlide = 0;
+            
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+            
+            
+            setInterval(() => showSlide(currentSlide + 1), 5000);
+            
+            
+            const musicBtn = document.getElementById('music-btn');
+            const birthdaySong = document.getElementById('birthday-song');
+            let isPlaying = false;
+            
+            musicBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    birthdaySong.pause();
+                    musicBtn.classList.remove('playing');
+                    musicBtn.innerHTML = '<span>🎵</span> Press Before You Read :)';
+                } else {
+                    birthdaySong.play().catch(e => {
+                        console.log("Audio play failed:", e);
+                        alert("Please add your audio file to play the song!");
+                    });
+                    musicBtn.classList.add('playing');
+                    musicBtn.innerHTML = '<span>🎵</span> Pause Music';
+                }
+                isPlaying = !isPlaying;
+            });
+
+           
+            function createConfetti() {
+                const colors = ['#ff9eb5', '#ffb6c1', '#ffd1dc', '#ff6b93', '#ff85a2'];
+                const confettiCount = 100;
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                   
+                    const size = Math.random() * 10 + 5;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * 100;
+                    const animationDuration = Math.random() * 5 + 5;
+                    const animationDelay = Math.random() * 5;
+                    
+                   
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = `${left}vw`;
+                    confetti.style.animationDuration = `${animationDuration}s`;
+                    confetti.style.animationDelay = `${animationDelay}s`;
+                    
+                    document.body.appendChild(confetti);
+                
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, (animationDuration + animationDelay) * 1000);
+                }
+            }
+            
+            
+            createConfetti();
+            setInterval(createConfetti, 8000);
+        });
+    </script>
+</body>
+</html>
