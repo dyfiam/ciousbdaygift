@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+            background: linear-gradient(135deg, #966fd6, #c9a0dc);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,7 +27,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #ff9eb5;
+            background-color: #bea9df;
             opacity: 0.7;
             border-radius: 50%;
             animation: fall linear forwards;
@@ -77,7 +77,7 @@
         }
 
         h1 {
-            color: #ff6b93;
+            color: #bea9df;
             margin-bottom: 20px;
             font-size: 2.5rem;
             text-shadow: 2px 2px 0px rgba(255, 182, 193, 0.3);
@@ -196,13 +196,13 @@
         }
 
         .birthday-message h2 {
-            color: #ff6b93;
+            color: #6031AE;
             margin-bottom: 15px;
             text-align: center;
         }
 
         .birthday-message p {
-            color: #666;
+            color: #00000;
             line-height: 1.6;
             font-size: 1.1rem;
         }
@@ -278,10 +278,13 @@
         
         <h1>Happy Birthday, Cious!</h1>
         
-        <div class="photo-gallery">
+          <div class="photo-gallery">
             <div class="photo-container">
-                <<img src="https://github.com/dyfiam/ciousbdaygift/refs/heads/main/Untitled%20design%20(6).png" alt="Photo 1" />
-				</div>
+                <div class="photo-slide active" style="background-image: url('https://raw.githubusercontent.com/dyfiam/ciousbdaygift/refs/heads/main/Untitled%20design%20(8).png')"></div>
+                <div class="photo-slide" style="background-image: url('https://raw.githubusercontent.com/dyfiam/ciousbdaygift/refs/heads/main/Untitled%20design%20(7).png')"></div>
+                <div class="photo-slide" style="background-image: url('https://raw.githubusercontent.com/dyfiam/ciousbdaygift/refs/heads/main/Untitled%20design%20(6).png')"></div>
+			    <div class="photo-slide" style="background-image: url('https://raw.githubusercontent.com/dyfiam/ciousbdaygift/refs/heads/main/Untitled%20design%20(5).png')"></div>
+            </div>
             <div class="gallery-controls">
                 <button class="gallery-btn" id="prev-btn">Previous</button>
                 <button class="gallery-btn" id="next-btn">Next</button>
@@ -290,7 +293,8 @@
         
         <div class="music-player">
             <button class="music-btn" id="music-btn">
-                <span>🎵</span> Press Before You Read :)
+                <span>Press Before You Read :)</span>
+				<span><br><br>Song: Strong Girl - Niki</span>
             </button>
         </div>
         
@@ -307,7 +311,7 @@
     </div>
 
     <audio id="birthday-song" loop>
-        <source src="NIKI - Strong Girl (Official Lyric Video).mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/dyfiam/ciousbdaygift/main/NIKI%20-%20Strong%20Girl%20(Official%20Lyric%20Video).mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
